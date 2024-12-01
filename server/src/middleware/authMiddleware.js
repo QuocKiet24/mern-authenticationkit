@@ -28,3 +28,39 @@ export const protect = asyncHandler(async (req, res, next) => {
     res.status(401).json({ message: "Not authorized, token failed!" });
   }
 });
+
+// admin middleware
+export const adminMiddleware = asyncHandler(async (req, res, next) => {
+  if (req.user && req.user.role === "admin") {
+    //if user is admin, move to next middleware/controller
+    next();
+    return;
+  } else {
+    res.status(403).json({ message: "Only admins can do this!" });
+  }
+});
+
+// creator middleware
+export const creatorMiddleware = asyncHandler(async (req, res, next) => {
+  if (
+    (req.user && req.user.role === "creator") ||
+    (req.user && req.user.role === "admin")
+  ) {
+    //if user is creator, move to next middleware/controller
+    next();
+    return;
+  } else {
+    res.status(403).json({ message: "Only creators can do this!" });
+  }
+});
+
+// verify middleware
+export const verifyMiddleware = asyncHandler(async (req, res, next) => {
+  if (req.user && req.user.isVerified) {
+    // if user is verified, move to the next middleware/controller
+    next();
+    return;
+  }
+  // if not verified, send 403 Forbidden --> terminate the request
+  res.status(403).json({ message: "Please verify your email first!" });
+});
