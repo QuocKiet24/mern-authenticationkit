@@ -1,9 +1,12 @@
 import express from "express";
 import {
+  changePassword,
+  forgotPassword,
   getUser,
   loginUser,
   logoutUser,
   registerUser,
+  resetPassword,
   updateUser,
   userLoginStatus,
   verifyEmail,
@@ -30,7 +33,12 @@ router.patch("/user", protect, updateUser);
 // admin route
 router.delete("/admin/users/:id", protect, adminMiddleware, deleteUser);
 router.get("/users", protect, creatorMiddleware, getAllUser);
+
+// auth
 router.get("/login-status", userLoginStatus);
 router.post("/verify-email", protect, verifyEmail);
 router.post("/verify-user/:verificationToken", verifyUser);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:resetPasswordToken", resetPassword);
+router.patch("/change-password", protect, changePassword);
 export default router;
