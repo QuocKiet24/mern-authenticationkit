@@ -5,6 +5,9 @@ import {
   logoutUser,
   registerUser,
   updateUser,
+  userLoginStatus,
+  verifyEmail,
+  verifyUser,
 } from "../controllers/auth/user.controller.js";
 import {
   adminMiddleware,
@@ -27,5 +30,7 @@ router.patch("/user", protect, updateUser);
 // admin route
 router.delete("/admin/users/:id", protect, adminMiddleware, deleteUser);
 router.get("/users", protect, creatorMiddleware, getAllUser);
-
+router.get("/login-status", userLoginStatus);
+router.post("/verify-email", protect, verifyEmail);
+router.post("/verify-user/:verificationToken", verifyUser);
 export default router;
