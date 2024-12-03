@@ -14,6 +14,7 @@ export const ContextProvider = ({ children }) => {
 
   const [user, setUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
+  const [isLoggin, setIsLoggin] = useState(false);
   const [userState, setUserState] = useState({
     name: "",
     email: "",
@@ -98,16 +99,16 @@ export const ContextProvider = ({ children }) => {
 
   // get user loggin status
   const userLoginStatus = async () => {
-    let loggedIn = false;
     try {
       const res = await axios.get(`${serverUrl}/api/v1/login-status`, {
         withCredentials: true, // send cookies to the server
       });
 
-      loggedIn = !!res.data;
+      setIsLoggin(res.data);
       setLoading(false);
 
-      if (!loggedIn) {
+      if (isLoggin === false) {
+        // redirect to login page
         router.push("/login");
       }
     } catch (error) {
@@ -370,6 +371,7 @@ export const ContextProvider = ({ children }) => {
         changePassword,
         allUsers,
         deleteUser,
+        isLoggin,
       }}
     >
       {children}
