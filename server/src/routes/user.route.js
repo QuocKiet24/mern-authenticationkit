@@ -32,7 +32,7 @@ router.patch("/user", protect, updateUser);
 
 // admin route
 router.delete("/admin/users/:id", protect, adminMiddleware, deleteUser);
-router.get("/users", protect, creatorMiddleware, getAllUser);
+router.get("/admin/users", protect, creatorMiddleware, getAllUser);
 
 // auth
 router.get("/login-status", userLoginStatus);
