@@ -5,6 +5,7 @@ Features
 * Forgot Password: Reset password functionality for users who forgot their credentials.
 * Change Password: Allow authenticated users to update their password.
 * Role-Based Access Control (RBAC): Grant different levels of access to users based on their roles.
+
 Tech Stack
 * Frontend: NextJS App Router, Axios
 * Backend: Node.js, Express.js
