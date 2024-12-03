@@ -106,11 +106,6 @@ export const ContextProvider = ({ children }) => {
 
       setIsLoggin(res.data);
       setLoading(false);
-
-      if (isLoggin === false) {
-        // redirect to login page
-        router.push("/login");
-      }
     } catch (error) {
       console.log("Error getting user login status", error);
     }
