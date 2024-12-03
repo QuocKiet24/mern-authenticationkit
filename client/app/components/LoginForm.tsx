@@ -2,35 +2,21 @@
 import { useUserContext } from "@/context/userContext";
 import React, { useState } from "react";
 
-const RegisterForm = () => {
-  const { registerUser, userState, handlerUserInput } = useUserContext();
-  const { name, email, password } = userState;
+const LoginForm = () => {
+  const { loginUser, userState, handlerUserInput } = useUserContext();
+  const { email, password } = userState;
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword(!showPassword);
   return (
-    <form onSubmit={registerUser} className="form-container">
+    <form onSubmit={loginUser} className="form-container">
       <div className="form-index">
-        <h1 className="title">Register for an account</h1>
+        <h1 className="title">Login to your account</h1>
         <p className="message">
-          Create an account. Already have an account?{" "}
-          <a href="/login" className="link">
-            Login
+          Login to your account. Dont't have an account?{" "}
+          <a href="/register" className="link">
+            Register
           </a>
         </p>
-        <div className="flex flex-col">
-          <label htmlFor="name" className="label">
-            Name
-          </label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            className="input"
-            placeholder="Enter your name"
-            value={name}
-            onChange={handlerUserInput("name")}
-          />
-        </div>
         <div className="mt-4 flex flex-col">
           <label htmlFor="email" className="label">
             Email
@@ -69,13 +55,18 @@ const RegisterForm = () => {
             )}
           </button>
         </div>
+        <div className="mt-4 flex justify-end">
+          <a href="/forgot-password" className="link">
+            Forgot password?
+          </a>
+        </div>
         <div className="flex">
           <button
-            disabled={!name || !email || !password}
+            disabled={!email || !password}
             type="submit"
             className="button"
           >
-            Register
+            Login
           </button>
         </div>
       </div>
@@ -83,4 +74,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

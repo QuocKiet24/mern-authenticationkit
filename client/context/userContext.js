@@ -62,8 +62,41 @@ export const ContextProvider = ({ children }) => {
     }
   };
 
+  // login user
+  const loginUser = async (e) => {
+    e.preventDefault();
+    if (!userState.email || !userState.password) {
+      toast.error("All fields are required");
+      return;
+    }
+    try {
+      const res = await axios.post(
+        `${serverUrl}/api/v1/login`,
+        {
+          email: userState.email,
+          password: userState.password,
+        },
+        {
+          withCredentials: true, // send cookies to the server
+        }
+      );
+      toast.success("User logged in successfully");
+      setUserState({
+        name: "",
+        email: "",
+        password: "",
+      });
+      router.push("/");
+    } catch (error) {
+      console.log("Error logging in user", error);
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ registerUser, userState, handlerUserInput }}>
+    <UserContext.Provider
+      value={{ registerUser, userState, handlerUserInput, loginUser }}
+    >
       {children}
     </UserContext.Provider>
   );
