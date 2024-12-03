@@ -8,7 +8,7 @@ const UserContext = createContext();
 // set axios to include credentials with every request
 axios.defaults.withCredentials = true;
 export const ContextProvider = ({ children }) => {
-  const serverUrl = "http://localhost:8000";
+  const serverUrl = "https://mern-authenticationkit.onrender.com";
 
   const router = useRouter();
 
