@@ -109,8 +109,6 @@ export const ContextProvider = ({ children }) => {
     } catch (error) {
       console.log("Error getting user login status", error);
     }
-
-    return loggedIn;
   };
 
   //logout user
